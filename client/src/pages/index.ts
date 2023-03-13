@@ -1,0 +1,10 @@
+export { default as HomePage } from './Main/Home/HomePage';
+export { default as AboutUsPage } from './Main/about-us/AboutUsPage';
+export * from './Main/components';
+export { default as AuthLayout } from './auth/AuthLayout';
+export * from './auth/components';
+export { default as LoginPage } from './auth/login/LoginPage';
+export { default as RegisterPage } from './auth/register/RegisterPage';
+export * from './auth/styled-components';
+export * from './index';
+export { default as UserProfilePage } from './user/UserProfilePage';
