@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import UserModel, { UserInput } from '../models/user.model';
 
-export async function userRegisterService(userInput: UserInput) {
+async function userRegisterService(userInput: UserInput) {
   try {
     const isFirstAccount = (await UserModel.countDocuments({})) === 0;
     const role = isFirstAccount ? 'admin' : 'user';
@@ -12,7 +12,7 @@ export async function userRegisterService(userInput: UserInput) {
   }
 }
 
-export async function userLoginService(userInput: Omit<UserInput, 'name'>) {
+async function userLoginService(userInput: Omit<UserInput, 'name'>) {
   const user = await UserModel.findOne({ email: userInput.email });
   if (!user) return false;
 
@@ -21,3 +21,5 @@ export async function userLoginService(userInput: Omit<UserInput, 'name'>) {
 
   return user;
 }
+
+export { userRegisterService, userLoginService };

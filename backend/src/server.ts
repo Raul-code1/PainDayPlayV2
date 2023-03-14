@@ -5,6 +5,7 @@ import express, { Express } from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cors from 'cors';
+import fileUpload from 'express-fileupload';
 
 import connectToDatabase from './utils/connect';
 import routes from './routes/routes';
@@ -17,6 +18,8 @@ const app: Express = express();
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(cors());
+app.use(fileUpload());
+app.use(express.static('./public'));
 
 app.listen(port, async () => {
   logger.info(`App running on port ${port}`);

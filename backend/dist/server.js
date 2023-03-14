@@ -41,6 +41,7 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const connect_1 = __importDefault(require("./utils/connect"));
 const routes_1 = __importDefault(require("./routes/routes"));
 const logger_1 = __importDefault(require("./utils/logger"));
@@ -49,6 +50,8 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)('tiny'));
 app.use((0, cors_1.default)());
+app.use((0, express_fileupload_1.default)());
+app.use(express_1.default.static('./public'));
 app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     logger_1.default.info(`App running on port ${port}`);
     yield (0, connect_1.default)(mongoose_1.default);
