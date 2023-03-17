@@ -3,16 +3,21 @@ import { createBrowserRouter } from 'react-router-dom';
 
 //?Is correct lazy loading like this in new react router dom version?
 
-const MainLayout = lazy(() => import('./pages/Main/components/MainLayout'));
+import { AdminProtectedRoute, UserProfileProtectedRoute } from './pages/Protected-routes';
+
+const MainLayout = lazy(() => import('./pages/Main/MainLayout'));
 const HomePage = lazy(() => import('./pages/Main/Home/HomePage'));
 const AboutUsPage = lazy(() => import('./pages/Main/about-us/AboutUsPage'));
 const CompaniesPage = lazy(() => import('./pages/Main/companies/CompaniesPage'));
+const SingleCompanyPage = lazy(() => import('./pages/Main/companies/single-company/SingleCompanyPage'));
 
 const AuthLayout = lazy(() => import('./pages/auth/AuthLayout'));
 const RegisterPage = lazy(() => import('./pages/auth/register/RegisterPage'));
 const LoginPage = lazy(() => import('./pages/auth/login/LoginPage'));
 
 const UserProfilePage = lazy(() => import('./pages/user/UserProfilePage'));
+
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 
 const appRouter = createBrowserRouter([
   {
@@ -34,6 +39,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/companies',
         element: <CompaniesPage />,
+      },
+      {
+        path: '/company/:companyId',
+        element: <SingleCompanyPage />,
       },
     ],
   },
@@ -59,7 +68,19 @@ const appRouter = createBrowserRouter([
     path: '/profile',
     element: (
       <Suspense fallback={<div>Loading..</div>}>
-        <UserProfilePage />
+        <UserProfileProtectedRoute>
+          <UserProfilePage />
+        </UserProfileProtectedRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: '/admin-dashboard',
+    element: (
+      <Suspense fallback={<div>Loading..</div>}>
+        <AdminProtectedRoute>
+          <AdminDashboard />
+        </AdminProtectedRoute>
       </Suspense>
     ),
   },

@@ -1,9 +1,13 @@
 import CompanyModel from '../models/company.model';
 
-async function getAllCompaniesService() {
-  /* //todo:query filters */
+async function getAllCompaniesService({ category, price }: { category: string; price: string }) {
+  const queryObject: { category?: string } = {};
 
-  return CompanyModel.find({});
+  if (category !== 'all') {
+    queryObject.category = category;
+  }
+
+  return CompanyModel.find(queryObject).sort(`${price}.price`);
 }
 
 async function getSingleCompanyService(companyId: string) {

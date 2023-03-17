@@ -13,8 +13,9 @@ export const userSlice = createSlice({
   name: 'userSlice',
   initialState: { user: getUserFromLocalStorage() },
   reducers: {
-    showSomeErrorToast: (_, { payload }: { payload: string }) => {
-      toast.error(payload);
+    userLogout: (state) => {
+      state.user = UserEmptyState;
+      localStorage.removeItem('user');
     },
   },
   extraReducers: (builder) => {
@@ -23,22 +24,28 @@ export const userSlice = createSlice({
       .addMatcher(authApi.endpoints.userRegisterRequest.matchFulfilled, (state, { payload }) => {
         state.user = { ...payload, isAuthenticated: true };
         localStorage.setItem('user', JSON.stringify(state.user));
+        toast.success(`Welcome! ${state.user.name} `);
+      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .addMatcher(authApi.endpoints.userRegisterRequest.matchRejected, (_) => {
+        toast.loading('Loading');
       })
       .addMatcher(authApi.endpoints.userRegisterRequest.matchRejected, (state) => {
         state.user = { ...UserEmptyState, isAuthenticated: false };
-        userSlice.caseReducers.showSomeErrorToast(state, { payload: 'Email already registered' });
+        toast.error('Email already registered');
       });
     /* Login */
     builder
       .addMatcher(authApi.endpoints.userLoginRequest.matchFulfilled, (state, { payload }) => {
         state.user = { ...payload, isAuthenticated: true };
         localStorage.setItem('user', JSON.stringify(state.user));
+        toast.success(`Hello  ${state.user.name}👋 `);
       })
       .addMatcher(authApi.endpoints.userLoginRequest.matchRejected, (state) => {
         state.user = { ...UserEmptyState, isAuthenticated: false };
-        userSlice.caseReducers.showSomeErrorToast(state, { payload: 'Invalid Email or Password' });
+        toast.error('Invalid Email or Password');
       });
   },
 });
 
-export const { showSomeErrorToast } = userSlice.actions;
+export const { userLogout } = userSlice.actions;

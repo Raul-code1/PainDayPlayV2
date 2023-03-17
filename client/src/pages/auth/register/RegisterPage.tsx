@@ -24,6 +24,7 @@ export default function RegisterPage() {
     if (password !== passwordConfirmation) {
       return toast.error('Passwords do not match');
     }
+
     // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     userRegisterRequest(formData).catch((err) => {
       toast.error('Something went wrong');
@@ -32,7 +33,6 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (user.isAuthenticated) {
-      toast.loading('Loading session...');
       setTimeout(() => {
         navigate('/companies');
       }, 2000);

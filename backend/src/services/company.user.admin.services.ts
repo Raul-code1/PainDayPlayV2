@@ -11,12 +11,8 @@ async function createCompanyService(companyInput: Company) {
 }
 
 async function findCompanyById(companyId: string) {
-  try {
-    const company = await CompanyModel.findOne({ _id: companyId });
-    return company;
-  } catch (error) {
-    throw new Error(error as any);
-  }
+  const company = await CompanyModel.findOne({ _id: companyId });
+  return company;
 }
 
 async function deleteCompanyService(companyId: string) {

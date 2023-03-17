@@ -30,6 +30,13 @@ export const params = {
   }),
 };
 
+export const queries = {
+  query: object({
+    category: string({ required_error: 'Please provide category' }).nonempty(),
+    price: string({ required_error: 'Please provide a filter price' }),
+  }),
+};
+
 export const createCompanySchema = object({
   ...companyPayload,
 });
@@ -46,7 +53,12 @@ export const getSingleCompanySchema = object({
   ...params,
 });
 
+export const queriesForCompaniesFilterSchema = object({
+  ...queries,
+});
+
 export type CreateCompanyInput = TypeOf<typeof createCompanySchema>;
 export type UpdateCompanyInput = TypeOf<typeof updateCompanySchema>;
 export type DeleteCompanyInput = TypeOf<typeof deleteCompanySchema>;
 export type GetSingleCompanyType = TypeOf<typeof getSingleCompanySchema>;
+export type GetCompaniesFiltersType = TypeOf<typeof queriesForCompaniesFilterSchema>;

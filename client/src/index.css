@@ -27,12 +27,6 @@ html {
     --type-of-blue: #094067;
     --highlight: #7f5af0;
 
-
-
-
-
-
-
     /* Fonts */
 
     --font-primary: 'Oswald', sans-serif;
@@ -42,6 +36,7 @@ html {
     --max-width: 1300px;
     --radius: 8px;
     --transition: all 0.3s ease-in-out;
+    --general-padding: .9375rem;
 }
 
 body {
@@ -49,7 +44,10 @@ body {
     font-weight: 600;
     color: var(--paragraph);
     background-color: var(--background);
+    position: relative;
 }
+
+/* Headings */
 
 h1,
 h2,
@@ -60,19 +58,23 @@ h5 {
     color: var(--headline);
 }
 
+/* Section */
 .section {
     width: 90%;
     margin: 0 auto;
     max-width: var(--max-width);
+
 }
 
+/* Images */
 
 .img {
     width: 100%;
     object-fit: cover;
-
 }
 
+
+/* Buttons styles  */
 .btn {
     background-color: var(--button);
     color: var(--button-text);
@@ -83,9 +85,13 @@ h5 {
     border-radius: var(--radius);
 }
 
+
+
 .btn:hover {
     background-color: var(--type-of-blue);
 }
+
+/* Form styles */
 
 input {
     background-color: var(--background);
@@ -98,4 +104,23 @@ label {
 
 .form-error-msg {
     color: var(--tertiary);
+}
+
+
+
+/* Links */
+.links-general-style {
+    text-decoration: none;
+    color: var(--main);
+    font-weight: 400;
+    transition: var(--transition);
+    text-transform: capitalize;
+}
+
+.links-general-style:hover {
+    color: var(--highlight);
+}
+
+.active {
+    color: var(--highlight);
 }

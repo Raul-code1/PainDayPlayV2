@@ -29,13 +29,8 @@ function createCompanyService(companyInput) {
 exports.createCompanyService = createCompanyService;
 function findCompanyById(companyId) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const company = yield company_model_1.default.findOne({ _id: companyId });
-            return company;
-        }
-        catch (error) {
-            throw new Error(error);
-        }
+        const company = yield company_model_1.default.findOne({ _id: companyId });
+        return company;
     });
 }
 exports.findCompanyById = findCompanyById;

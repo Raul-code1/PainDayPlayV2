@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { UserResponse, UserRegisterInput, UserLoginInput } from '../../models/user.types';
+import { API_ROOT_URL } from './helpers';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
+  baseQuery: fetchBaseQuery({ baseUrl: API_ROOT_URL }),
   endpoints: (build) => ({
     userRegisterRequest: build.mutation<UserResponse, UserRegisterInput>({
       query: (userRegister) => ({

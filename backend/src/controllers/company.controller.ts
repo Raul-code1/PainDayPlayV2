@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Response, Request } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { getAllCompaniesService, getSingleCompanyService } from '../services/company.service';
-import { GetSingleCompanyType } from '../schemas/company.schema';
+import { GetCompaniesFiltersType, GetSingleCompanyType } from '../schemas/company.schema';
 
 /* Get all companies */
-async function getAllCompanies(req: Request, res: Response) {
-  const companies = await getAllCompaniesService();
+async function getAllCompanies(req: Request<any, any, any, GetCompaniesFiltersType['query']>, res: Response) {
+  const { category, price } = req.query;
+
+  const companies = await getAllCompaniesService({ category, price });
   return res.status(StatusCodes.OK).json({ companies, count: companies.length });
 }
 

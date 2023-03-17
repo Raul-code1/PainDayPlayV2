@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { useAppSelector } from '../../../redux/hooks';
 import { useUserLoginRequestMutation } from '../../../redux/services/authApi';
@@ -25,7 +24,6 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user.isAuthenticated) {
-      toast.loading('Loading session...');
       setTimeout(() => {
         navigate('/companies');
       }, 2000);

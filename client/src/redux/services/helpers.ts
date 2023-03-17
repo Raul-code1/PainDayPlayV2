@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable import/named */
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
@@ -14,3 +15,5 @@ export function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryEr
 export function isErrorWithMessage(error: unknown): error is { message: string } {
   return typeof error === 'object' && error != null && 'message' in error && typeof (error as any).message === 'string';
 }
+
+export const API_ROOT_URL = 'http://localhost:8000';

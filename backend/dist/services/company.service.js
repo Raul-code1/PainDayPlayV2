@@ -14,10 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSingleCompanyService = exports.getAllCompaniesService = void 0;
 const company_model_1 = __importDefault(require("../models/company.model"));
-function getAllCompaniesService() {
+function getAllCompaniesService({ category, price }) {
     return __awaiter(this, void 0, void 0, function* () {
-        /* //todo:query filters */
-        return company_model_1.default.find({});
+        const queryObject = {};
+        if (category !== 'all') {
+            queryObject.category = category;
+        }
+        return company_model_1.default.find(queryObject).sort(`${price}.price`);
     });
 }
 exports.getAllCompaniesService = getAllCompaniesService;

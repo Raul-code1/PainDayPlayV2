@@ -15,7 +15,8 @@ const company_service_1 = require("../services/company.service");
 /* Get all companies */
 function getAllCompanies(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const companies = yield (0, company_service_1.getAllCompaniesService)();
+        const { category, price } = req.query;
+        const companies = yield (0, company_service_1.getAllCompaniesService)({ category, price });
         return res.status(http_status_codes_1.StatusCodes.OK).json({ companies, count: companies.length });
     });
 }
