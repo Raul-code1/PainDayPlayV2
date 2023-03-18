@@ -13,8 +13,6 @@ export default function CompanyInfo({ company }: Props) {
 
   const imageUrlHelper = `${API_ROOT_URL}${imageUrl}`;
 
-  console.log(company);
-
   return (
     <CompanyInfoContainer>
       <div className="company-info-image-container">

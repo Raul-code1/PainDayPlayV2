@@ -21,6 +21,7 @@ import checkPermissions from '../utils/check-permissions';
 
 async function getAllComments(req: Request<GetAllCommentsParams['params']>, res: Response) {
   const { companyId } = req.params;
+  console.log(companyId);
 
   const isCompanyExist = await findCompanyById(companyId);
 
@@ -47,7 +48,7 @@ async function createComment(req: Request<any, any, CreateCommentInput['body']>,
 
   const isCommentExist = await findCommentByUserIdAndCompanyId({ author: userId as string, companyId: companyId });
   if (isCommentExist) {
-    return res.status(StatusCodes.NOT_FOUND).json({ msg: `No comment with ` });
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: `Ya has comentado en esta compañia anteriormente ` });
   }
 
   const comment = await createCommentService({

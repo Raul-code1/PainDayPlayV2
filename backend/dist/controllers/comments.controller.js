@@ -20,6 +20,7 @@ const check_permissions_1 = __importDefault(require("../utils/check-permissions"
 function getAllComments(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { companyId } = req.params;
+        console.log(companyId);
         const isCompanyExist = yield (0, company_user_admin_services_1.findCompanyById)(companyId);
         if (!isCompanyExist) {
             return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: `No company with id ${companyId}` });
@@ -40,7 +41,7 @@ function createComment(req, res) {
         }
         const isCommentExist = yield (0, comments_services_1.findCommentByUserIdAndCompanyId)({ author: userId, companyId: companyId });
         if (isCommentExist) {
-            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: `No comment with ` });
+            return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ msg: `Ya has comentado en esta compañia anteriormente ` });
         }
         const comment = yield (0, comments_services_1.createCommentService)({
             author: userId,

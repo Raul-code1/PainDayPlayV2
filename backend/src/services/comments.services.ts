@@ -23,7 +23,11 @@ async function createCommentService({
 }
 
 async function getAllCommentsService(companyId: string) {
-  return CommentModel.find({ companyId });
+  try {
+    return CommentModel.find({ companyId });
+  } catch (error) {
+    throw new Error('AQUI EL ERRROR SDFDSFDSDFDS');
+  }
 }
 
 async function updateCommentService({

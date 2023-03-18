@@ -34,7 +34,12 @@ function createCommentService({ text, companyId, author, usernameAuthor, }) {
 exports.createCommentService = createCommentService;
 function getAllCommentsService(companyId) {
     return __awaiter(this, void 0, void 0, function* () {
-        return comments_model_1.default.find({ companyId });
+        try {
+            return comments_model_1.default.find({ companyId });
+        }
+        catch (error) {
+            throw new Error('AQUI EL ERRROR SDFDSFDSDFDS');
+        }
     });
 }
 exports.getAllCommentsService = getAllCommentsService;

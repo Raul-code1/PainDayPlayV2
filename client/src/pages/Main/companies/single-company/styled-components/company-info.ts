@@ -50,6 +50,7 @@ export const CompanyInfoContainer = styled.div`
     .website {
       color: var(--main);
       font-weight: bold;
+      padding-bottom: 1.25rem;
       a {
         color: var(--highlight);
       }
