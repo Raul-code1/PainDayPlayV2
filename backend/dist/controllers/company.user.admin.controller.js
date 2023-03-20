@@ -33,7 +33,7 @@ function deleteCompany(req, res) {
             return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: `No company found with id ${companyId}` });
         }
         yield (0, company_user_admin_services_1.deleteCompanyService)(companyId);
-        return res.status(http_status_codes_1.StatusCodes.OK).json({ companies: 'Company deleted successfully' });
+        return res.status(http_status_codes_1.StatusCodes.OK).json({ msg: 'Company deleted successfully' });
     });
 }
 exports.deleteCompany = deleteCompany;

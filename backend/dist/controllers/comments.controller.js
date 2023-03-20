@@ -58,7 +58,15 @@ function updateComment(req, res) {
         const { userId, role } = res.locals.user;
         const { text } = req.body;
         const { commentId } = req.params;
-        const comment = yield (0, comments_services_1.findCommentByUserIdAndId)({ author: userId, commentId });
+        let comment;
+        if (role === 'admin') {
+            comment = yield (0, comments_services_1.findCommentById)({ commentId });
+        }
+        else {
+            comment = yield (0, comments_services_1.findCommentByUserIdAndId)({ commentId, author: userId });
+        }
+        console.log(userId);
+        console.log(comment === null || comment === void 0 ? void 0 : comment.author);
         if (!comment) {
             return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: `No comment with id ${commentId}` });
         }
@@ -85,7 +93,13 @@ function deleteComment(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { commentId } = req.params;
         const { userId, role } = res.locals.user;
-        const comment = yield (0, comments_services_1.findCommentByUserIdAndId)({ author: userId, commentId });
+        let comment;
+        if (role === 'admin') {
+            comment = yield (0, comments_services_1.findCommentById)({ commentId });
+        }
+        else {
+            comment = yield (0, comments_services_1.findCommentByUserIdAndId)({ commentId, author: userId });
+        }
         if (!comment) {
             return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: `No comment with id ${commentId}` });
         }

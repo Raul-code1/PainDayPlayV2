@@ -12,9 +12,10 @@ import {
   createCommentService,
   deleteCommentService,
   findCommentByUserIdAndCompanyId,
-  findCommentByUserIdAndId,
+  findCommentById,
   getAllCommentsService,
   updateCommentService,
+  findCommentByUserIdAndId,
 } from '../services/comments.services';
 import { findCompanyById } from '../services/company.user.admin.services';
 import checkPermissions from '../utils/check-permissions';
@@ -69,7 +70,15 @@ async function updateComment(
   const { text } = req.body;
   const { commentId } = req.params;
 
-  const comment = await findCommentByUserIdAndId({ author: userId as string, commentId });
+  let comment;
+  if (role === 'admin') {
+    comment = await findCommentById({ commentId });
+  } else {
+    comment = await findCommentByUserIdAndId({ commentId, author: userId });
+  }
+
+  console.log(userId);
+  console.log(comment?.author);
 
   if (!comment) {
     return res.status(StatusCodes.NOT_FOUND).json({ msg: `No comment with id ${commentId}` });
@@ -101,7 +110,13 @@ async function deleteComment(req: Request<DeleteCommentParams['params']>, res: R
   const { commentId } = req.params;
   const { userId, role } = res.locals.user;
 
-  const comment = await findCommentByUserIdAndId({ author: userId as string, commentId });
+  let comment;
+
+  if (role === 'admin') {
+    comment = await findCommentById({ commentId });
+  } else {
+    comment = await findCommentByUserIdAndId({ commentId, author: userId });
+  }
 
   if (!comment) {
     return res.status(StatusCodes.NOT_FOUND).json({ msg: `No comment with id ${commentId}` });

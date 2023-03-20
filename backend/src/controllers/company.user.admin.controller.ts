@@ -26,7 +26,7 @@ async function deleteCompany(req: Request<DeleteCompanyInput['params']>, res: Re
     return res.status(StatusCodes.NOT_FOUND).json({ msg: `No company found with id ${companyId}` });
   }
   await deleteCompanyService(companyId);
-  return res.status(StatusCodes.OK).json({ companies: 'Company deleted successfully' });
+  return res.status(StatusCodes.OK).json({ msg: 'Company deleted successfully' });
 }
 
 /* Update company */

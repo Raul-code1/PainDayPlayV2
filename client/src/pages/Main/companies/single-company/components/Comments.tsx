@@ -22,7 +22,7 @@ export default function Comments({ companyId }: Props) {
   return (
     <CommentsContainer>
       {comments?.comments.length === 0 && (
-        <h4>Esta compañia no tiene comentarios de momento, se el primero en comentar</h4>
+        <h4>Esta instalacion deportiva no tiene comentarios de momento, se el primero en comentar.</h4>
       )}
       <CommentsForm />
       {comments.comments.length > 0 && <h4>Comentarios :</h4>}

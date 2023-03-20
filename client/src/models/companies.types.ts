@@ -28,3 +28,17 @@ export interface SingleCompanyResponse {
 }
 
 /* App state */
+
+export interface AddAndEditCompanyFormState {
+  name: string;
+  category: string;
+  description: string;
+  location: string;
+  pricing: {
+    price: number;
+    plan: string;
+  }[];
+  phone: string;
+  website: string;
+  imageUrl: string;
+}

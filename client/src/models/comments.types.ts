@@ -6,6 +6,15 @@ export interface CommentsResponse {
 export interface CreateCommentsResponse {
   comments: Comment[];
 }
+
+export interface UpdateCommentsResponse {
+  comments: Comment[];
+}
+
+export interface DeleteCommentsResponse {
+  msg: string;
+}
+
 export interface Comment {
   _id: string;
   author: string;

@@ -8,6 +8,10 @@ async function findCommentByUserIdAndId({ author, commentId }: { author: string;
   return await CommentModel.findOne({ author, commentId });
 }
 
+async function findCommentById({ commentId }: { commentId: string }) {
+  return await CommentModel.findOne({ commentId });
+}
+
 async function createCommentService({
   text,
   companyId,
@@ -52,5 +56,6 @@ export {
   getAllCommentsService,
   findCommentByUserIdAndId,
   updateCommentService,
+  findCommentById,
   deleteCommentService,
 };

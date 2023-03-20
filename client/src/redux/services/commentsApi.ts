@@ -3,10 +3,15 @@
 import { createApi, fetchBaseQuery, BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query/react';
 
 import { API_ROOT_URL } from './helpers';
-import { CommentsResponse, CreateCommentsResponse } from '../../models/comments.types';
+import {
+  CommentsResponse,
+  CreateCommentsResponse,
+  DeleteCommentsResponse,
+  UpdateCommentsResponse,
+} from '../../models/comments.types';
 import { RootState } from '../store';
 
-interface CustomErrorResponse {
+export interface CustomErrorResponse {
   status: number;
   data: {
     msg: string;
@@ -39,7 +44,27 @@ export const commentsAPI = createApi({
       }),
       invalidatesTags: ['Comments'],
     }),
+    deleteComment: build.mutation<DeleteCommentsResponse, string>({
+      query: (commentId) => ({
+        url: `/api/v1/comment/${commentId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Comments'],
+    }),
+    updateComment: build.mutation<UpdateCommentsResponse, { text: string; commentId: string }>({
+      query: ({ text, commentId }) => ({
+        url: `/api/v1/comment/${commentId}`,
+        method: 'PATCH',
+        body: { text },
+      }),
+      invalidatesTags: ['Comments'],
+    }),
   }),
 });
 
-export const { useGetAllCommentsForCompanyQuery, useCreateCommentMutation } = commentsAPI;
+export const {
+  useGetAllCommentsForCompanyQuery,
+  useCreateCommentMutation,
+  useDeleteCommentMutation,
+  useUpdateCommentMutation,
+} = commentsAPI;

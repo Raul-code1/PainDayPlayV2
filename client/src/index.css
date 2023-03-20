@@ -26,6 +26,7 @@ html {
     --type-of-green: #2cb67d;
     --type-of-blue: #094067;
     --highlight: #7f5af0;
+    --second-main: #303033;
 
     /* Fonts */
 
@@ -123,4 +124,29 @@ label {
 
 .active {
     color: var(--highlight);
+}
+
+/* 
+
+header background
+header is in src/pages/Home/HomePage.tsx
+
+
+*/
+
+header {
+    background: url('./assets/hero-img-2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+@media (min-width:767px) {
+    header {
+        background: url('./assets/hero-img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
 }

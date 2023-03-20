@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCommentService = exports.updateCommentService = exports.findCommentByUserIdAndId = exports.getAllCommentsService = exports.createCommentService = exports.findCommentByUserIdAndCompanyId = void 0;
+exports.deleteCommentService = exports.findCommentById = exports.updateCommentService = exports.findCommentByUserIdAndId = exports.getAllCommentsService = exports.createCommentService = exports.findCommentByUserIdAndCompanyId = void 0;
 const comments_model_1 = __importDefault(require("../models/comments.model"));
 function findCommentByUserIdAndCompanyId({ author, companyId }) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -26,6 +26,12 @@ function findCommentByUserIdAndId({ author, commentId }) {
     });
 }
 exports.findCommentByUserIdAndId = findCommentByUserIdAndId;
+function findCommentById({ commentId }) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield comments_model_1.default.findOne({ commentId });
+    });
+}
+exports.findCommentById = findCommentById;
 function createCommentService({ text, companyId, author, usernameAuthor, }) {
     return __awaiter(this, void 0, void 0, function* () {
         return comments_model_1.default.create({ text, companyId, author, usernameAuthor });

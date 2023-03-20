@@ -18,6 +18,9 @@ const LoginPage = lazy(() => import('./pages/auth/login/LoginPage'));
 const UserProfilePage = lazy(() => import('./pages/user/UserProfilePage'));
 
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AllAdminCompanies = lazy(() => import('./pages/admin/all-admin-companies/AllAdminCompanies'));
+const AddAdminCompany = lazy(() => import('./pages/admin/add-company/AdminAddCompany'));
+const AdminEditCompany = lazy(() => import('./pages/admin/edit-company/AdminEditCompany'));
 
 const appRouter = createBrowserRouter([
   {
@@ -83,6 +86,20 @@ const appRouter = createBrowserRouter([
         </AdminProtectedRoute>
       </Suspense>
     ),
+    children: [
+      {
+        index: true,
+        element: <AllAdminCompanies />,
+      },
+      {
+        path: '/admin-dashboard/add-company',
+        element: <AddAdminCompany />,
+      },
+      {
+        path: '/admin-dashboard/edit-company/:companyIdEdit',
+        element: <AdminEditCompany />,
+      },
+    ],
   },
 ]);
 
